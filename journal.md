@@ -19,3 +19,7 @@ Tomorrow, I will create a public repository and author a README.md and the LICEN
 
 **06-Mar-2018**
 
+Well, I have been able to get the public repo set up and the initial commit completed.  I have branched my local repo so I am working on v0.1.0.  I will tickle the patch number once I have something I feel is ready to start inputting data for real.
+
+So, as I noted yesterday, this is going to be a learning process for me since I am not strong in Java and I have never used JavaFX before with the exception of some basic tutorials.  So I have to go figure out how to integrate the .css with the .fxml.  I have a feeling that I will have to produce some simple Java to display my login screen to see the results.  Ultimately, this is what the experience is all about.  I figure this is a good a place to start as any: https://docs.oracle.com/javafx/2/css_tutorial/jfxpub-css_tutorial.htm.
+
