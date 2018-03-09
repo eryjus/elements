@@ -29,3 +29,12 @@ So, as I noted yesterday, this is going to be a learning process for me since I 
 I was able to get the FXML form to load.  Granted, there was a lot of copy and paste involved (hey -- the example login form form Oracle is pretty close to what I need anyway!), but it compiles and runs.  And, it is very plain, which is what I really want because I want to be able to decorate it using the .css file I am going to include.
 
 I'm pretty happy about where I am at now, so I am going to commit this code and push it to GitHub.  The point of this journal (and the project for that matter) is to allow others to learn from me and my mistakes. 
+
+So..., now that the commit is done and pushed to the central repo, on to making the .css file work.  But before I even got there, I went into SceneBuilder and changed the label at the top of the form to brand it for 'cba Elements' and it changed the whole file layout.  So I had to compile and execute it again to make sure it will still run.  I have a feeling that as long as I write a file by hand and get into SceneBuilder to modify it, the layout of the file will change dramatically.  I have learned, and you have been warned.
+
+
+**08-Mar-2018**
+
+Ok, thinking about it overnight, Oracle has a pretty good example of using a .css to decorate a JavaFX form.  What I do not understand is how each element fits together.  So I am going to create an empty file to see if I can get it loaded and then add the decorations one at a time to see what they do.
+
+So, a little Google time and I was able to get the login form to be sized properly, the background image set to my own desired one, locked the login form on the screen and added an exit button and backed it with a controller.  I'm very happy with this and will commit my changes again.  I am not able to actually authenticate yet, but that is coming up next.

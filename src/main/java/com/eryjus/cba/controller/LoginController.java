@@ -1,9 +1,11 @@
 package com.eryjus.cba.controller;
  
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
  
+
 public class LoginController {
     @FXML private Text actiontarget;
     
@@ -11,4 +13,7 @@ public class LoginController {
         actiontarget.setText("Sign in button pressed");
     }
 
+    @FXML protected void handleExitButtonAction(ActionEvent event) {
+        Platform.exit();
+    }
 }

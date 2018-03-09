@@ -26,6 +26,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 public class ElementsApp extends Application {
@@ -36,10 +37,12 @@ public class ElementsApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/view/login.fxml"));
-        Scene scene = new Scene(root, 325, 275);
+        Scene scene = new Scene(root, 375, 234);
         
         stage.setTitle("cba Elements Login");
         stage.setScene(scene);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.sizeToScene();
         stage.show();
     }
 }
