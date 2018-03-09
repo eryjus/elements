@@ -38,3 +38,7 @@ So..., now that the commit is done and pushed to the central repo, on to making 
 Ok, thinking about it overnight, Oracle has a pretty good example of using a .css to decorate a JavaFX form.  What I do not understand is how each element fits together.  So I am going to create an empty file to see if I can get it loaded and then add the decorations one at a time to see what they do.
 
 So, a little Google time and I was able to get the login form to be sized properly, the background image set to my own desired one, locked the login form on the screen and added an exit button and backed it with a controller.  I'm very happy with this and will commit my changes again.  I am not able to actually authenticate yet, but that is coming up next.
+
+I will start be making the effort to read the login information provided and present it to the console.... which was surprisingly easy to do.  I am going to commit this change as well.  
+
+The next step for me is to make sure that the source so far is properly documented and then add logging (log4j) and the configuration file (cba.ini).
