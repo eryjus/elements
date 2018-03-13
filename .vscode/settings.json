@@ -1,6 +1,11 @@
 {
     "java.configuration.updateBuildConfiguration": "automatic",
     "cSpell.words": [
-        "repo"
+        "classpath",
+        "repo",
+        "tinyint",
+        "tzinfo",
+        "varchar",
+        "zoneinfo"
     ]
 }

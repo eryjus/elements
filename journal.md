@@ -42,3 +42,66 @@ So, a little Google time and I was able to get the login form to be sized proper
 I will start be making the effort to read the login information provided and present it to the console.... which was surprisingly easy to do.  I am going to commit this change as well.  
 
 The next step for me is to make sure that the source so far is properly documented and then add logging (log4j) and the configuration file (cba.ini).
+
+I have noticed a problem with my vscode configuration where my LoginController class is required to explicitly `extends Object`.  I will look back at this at a later time.
+
+As I wrap up for the night, I have an IniController written but not tested.  I will take this on tomorrow.
+
+
+**09-Mar-2018**
+
+So, I'm camping this weekend and I am testing this from the trailer now that quiet hours have started.  Now to testing the IniController...  and it worked.  But I'm tired and I will document the class tomorrow.
+
+
+**10-Mar-2018**
+
+Today's first task is to document the IniController class.  This was fast enough to accomplish.  So what else is next on the list?  How about the following:
+
+* Create a Security database and connect to it
+* Validate the user ID and password to the Security Database
+* Create the Elements database and connect to it
+
+So, since I have limited internet access, I'm figuring the best thing will be to create the Security database.  There will be several tables in the database, but the first one will be a users table, which will be:
+* User name (varchar(25))
+* Real Name (varchar(120))
+* Password (MD5) (char(32))
+* Email address (varchar(120))
+* Enabled tinyint(1)
+
+With that, what is the best method to ensure I have a good database to work against?  There are several options I can utilize here:
+
+1. Use a script to create the Security schema and populate the default data.  However, how to guarantee that the script has been run?
+1. Try to access the database and if there is an error create the schema.  However, how to differentiate between a bad user/password in cba.ini versus a missing database?
+1. Run a series of SQL statements on open that will perform the "if not exists" flavors of SQL statements.  However, how to make sure that performance is good.
+1. Query the information_schema schema to determine if what we are looking for exists.  But can we guarantee that the user has access to information_schema?
+
+I think some research is in order....
+
+So, the first thing I find is that the permissions for information_schema correspond to the permissions a user has for the schema.table in question.
+
+I am strongly considering using information_schema.schemata to determine if the database exists.  Actually, I will do the same for the tables I need.  If the database does not exist, I will create it and immediately populate it with the default data.  This will mean that the Security controller will need to have an initialize method that opens the connection, check for the existence, create the database and populate default data as necessary.  I think I will use the default schema for the user and explicitly query schemas with each SQL statement.
+
+Continuing with the thinking above, I will need to create the cba_Security database, the cba_Security.users table, and populate the `admin` user with the default password.
+
+
+**11-Mar-2018**
+
+OK, now that I am back home and have a good internet connection, my first order of business is to get the syntax/semantic highlighting working again with vscode.  Compiling just to find a problem is getting tiresome.
+
+I was able to solve the issues with a few steps:
+1. I removed the ~/.settings/Code folder since it appeared corrupt
+1. I then removed the .classpath file since it was also corrupt (which was regenerated)
+1. I then set the JAVA_HOME global environment variable to the JDK 1.8.
+
+This cleaned up several things allowed me to start removing many of the other work-around.
+
+Overall I have been able to dynamically create and populate the cba_system database and the users table with the admin user.  However, what I have done requires some default setup to have been completed ahead of time:
+* `default_time_zone` must be set in cnf.ini.  This might require the population of the time zone names.  This might require running `mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -p mysql`.
+* Each user that will be used to connect to each schema (as defined in the cba.ini file) needs to be granted privileges to the schema it will connect to.  The default configuration will be to use user `cba`, so this can easily be done with `grant all privileges on *.* to 'cba'@'localhost' identified by 'C00lApp$';` which also identifies the default password.
+
+Finally, I am at a position I can actually authenticate a user.
+
+
+**12-Mar-2018**
+
+Well today I was able to write the authentication code.   I am currently passing the password in clear text to the MySQL server, so that is something I need to take care of one day.  I also documented the SecurityController class and I am ready to commit my changes.
