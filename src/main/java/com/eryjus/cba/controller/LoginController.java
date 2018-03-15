@@ -17,12 +17,20 @@
 package com.eryjus.cba.controller;
  
 import com.eryjus.cba.ElementsApp;
+import com.eryjus.cba.model.SecurityModel;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 
 /***
  * The FXML Login Controller class, responsble for authenticating the user
@@ -33,6 +41,7 @@ public class LoginController {
     @FXML private Text actiontarget;
     @FXML private TextField userField;
     @FXML private TextField passwordField;
+    @FXML private Button btnSignIn;
     
     /**
      * Handle the SignIn button click event, validating the user and password against the database
@@ -45,8 +54,9 @@ public class LoginController {
         ElementsApp.LOGGER.info("User " + userField.getText() + " requested to log in");
         
         try {
-            if (SecurityController.authenticateUser(userField.getText(), passwordField.getText()) == false) {
+            if (SecurityModel.authenticateUser(userField.getText(), passwordField.getText()) == false) {
                 actiontarget.setText("Cannot log in");
+                return;
             } else {
                 authenticated = true;
             }
@@ -54,6 +64,29 @@ public class LoginController {
 
         if (authenticated) {
             ElementsApp.LOGGER.info("User " + userField.getText() + " has been authenticated and can log in.");
+            Parent root;
+
+            try {
+                root = FXMLLoader.load(getClass().getResource("/view/elements.fxml"));
+            } catch (Exception ex) {
+                actiontarget.setText("Failed to load ELement form");
+                ElementsApp.LOGGER.error(ex.getMessage(), ex);
+                return;
+            }
+
+            Platform.setImplicitExit(false);
+            Stage oldStage = (Stage)btnSignIn.getScene().getWindow();
+            Stage stage = new Stage();
+            Scene scene = new Scene(root, 1200, 800);
+
+            stage.setTitle("cba Elements Maintenance");
+            stage.initStyle(StageStyle.DECORATED);
+            stage.sizeToScene();
+            stage.setScene(scene);
+
+            oldStage.hide();
+            stage.show();
+            Platform.setImplicitExit(true);
         }
     }
 

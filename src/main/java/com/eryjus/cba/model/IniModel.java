@@ -1,5 +1,5 @@
 //===================================================================================================================
-// IniController.java -- This is the controller that is responsible for the cba.ini values
+// IniModel.java -- This is the model that is responsible for the cba.ini values
 // -----------------------------------------------------------------------------------------------------------------
 //
 // This class is responsible for reading the values from the cba.ini file.  Each element that can be read will
@@ -14,20 +14,21 @@
 //===================================================================================================================
 
 
-package com.eryjus.cba.controller;
+package com.eryjus.cba.model;
+
+import java.io.File;
+import java.util.prefs.Preferences;
+
+import com.eryjus.cba.ElementsApp;
 
 import org.ini4j.Ini;
 import org.ini4j.IniPreferences;
-import java.util.prefs.Preferences;
-import java.io.File;
-
-import com.eryjus.cba.ElementsApp;
 
 
 /**
  * The IniControler class is used to interface with the cba.ini configuration file.
  */
-public class IniController {
+public class IniModel {
     private static Ini ini;
     private static Preferences prefs;
 
@@ -35,11 +36,11 @@ public class IniController {
      * Initialize the class to be able to read the class
      */
     public static void initialize() throws Exception {
-        ElementsApp.LOGGER.trace("Initializing IniController class");
+        ElementsApp.LOGGER.trace("Initializing IniModel class");
 
         String fn = "cba.ini";
-        IniController.ini = new Ini(new File(fn));
-        IniController.prefs = new IniPreferences(IniController.ini);
+        IniModel.ini = new Ini(new File(fn));
+        IniModel.prefs = new IniPreferences(IniModel.ini);
     }
 
 

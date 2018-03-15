@@ -21,8 +21,11 @@
 
 package com.eryjus.cba;
 
-import org.apache.logging.log4j.Logger;
+import com.eryjus.cba.model.IniModel;
+import com.eryjus.cba.model.SecurityModel;
+
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -30,9 +33,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
-import com.eryjus.cba.controller.IniController;
-import com.eryjus.cba.controller.SecurityController;
 
 
 /**
@@ -49,8 +49,8 @@ public class ElementsApp extends Application {
     public static void main(String[] args) throws Exception {
         LOGGER.info("Welcome to 'cba Elements Maintenance'; (c) 2018 Adam Clark");
         LOGGER.info("   Licensed under the BEER-WARE License; revision 42");
-        IniController.initialize();
-        SecurityController.initialize();
+        IniModel.initialize();
+        SecurityModel.initialize();
         launch(args);
     }
 

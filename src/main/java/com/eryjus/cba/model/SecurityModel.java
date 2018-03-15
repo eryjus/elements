@@ -1,5 +1,5 @@
 //===================================================================================================================
-// SecurityController.java -- This class will handle the security administration for users
+// SecurityModel.java -- This class will handle the security validation and persistent stores
 // -----------------------------------------------------------------------------------------------------------------
 //
 // This class is the application responsible for interfacing with MySQL to read, write and update the Security 
@@ -14,7 +14,7 @@
 //===================================================================================================================
 
 
-package com.eryjus.cba.controller;
+package com.eryjus.cba.model;
 
 
 import java.sql.Connection;
@@ -29,7 +29,7 @@ import com.eryjus.cba.ElementsApp;
 /**
  * The controller for security and log ins
  */
-public class SecurityController {
+public class SecurityModel {
     private static Connection conn;
     private static Statement stmt;
     private static ResultSet rs;
@@ -39,7 +39,7 @@ public class SecurityController {
     /**
      * private constructor to prevent instantiation
      */
-    private SecurityController() {}
+    private SecurityModel() {}
 
 
     /**
@@ -54,15 +54,20 @@ public class SecurityController {
         }
 
         Properties connProps = new Properties();
-        connProps.put("user", IniController.getSystemUser());
-        connProps.put("password", IniController.getSystemPassword());
-        schema = IniController.getSystemSchema();
+        connProps.put("user", IniModel.getSystemUser());
+        connProps.put("password", IniModel.getSystemPassword());
+        schema = IniModel.getSystemSchema();
 
         conn = DriverManager.getConnection("jdbc:mysql://localhost/", connProps);
 
         stmt = conn.createStatement();
-        String sql = "SELECT schema_name FROM information_schema.schemata WHERE schema_name = '" + 
-                IniController.getSystemSchema() + "'";
+
+        String sql = 
+        //- SQL -----------------------------------------------------------------------------------------------------
+        "SELECT schema_name " + 
+        "FROM information_schema.schemata " + 
+        "WHERE schema_name = '" + IniModel.getSystemSchema() + "'";
+        //- SQL -----------------------------------------------------------------------------------------------------
 
         rs = stmt.executeQuery(sql);
         
@@ -80,23 +85,42 @@ public class SecurityController {
         String sql;
 
         ElementsApp.LOGGER.debug("Creating the {} database", schema);
-        sql = "CREATE SCHEMA " + schema + " CHARACTER SET utf8 COLLATE utf8_general_ci";
+
+        sql = 
+        //- SQL -----------------------------------------------------------------------------------------------------
+        "CREATE SCHEMA " + schema + 
+        "   CHARACTER SET utf8 " + 
+        "   COLLATE utf8_general_ci";
+        //- SQL -----------------------------------------------------------------------------------------------------
+
         stmt.execute(sql);
 
         ElementsApp.LOGGER.debug("Creating the users table");
-        sql = "CREATE TABLE " + schema + ".users (" + 
-            "    user_id VARCHAR(25), " +
-            "    user_name VARCHAR(120), " +
-            "    user_password CHAR(32), " +
-            "    user_email VARCHAR(120), " +
-            "    user_enabled TINYINT(1), " +
-            "    PRIMARY KEY (user_id)" +
-            ")";
+
+        sql = 
+        //- SQL -----------------------------------------------------------------------------------------------------
+        "CREATE TABLE " + schema + ".users " + 
+        "(" + 
+        "   user_id         VARCHAR(25), " +
+        "   user_name       VARCHAR(120), " +
+        "   user_password   CHAR(32), " +
+        "   user_email      VARCHAR(120), " +
+        "   user_enabled    TINYINT(1), " +
+        "" + 
+        "PRIMARY KEY (user_id)" +
+        ")";
+        //- SQL -----------------------------------------------------------------------------------------------------
+
         stmt.execute(sql);
 
         ElementsApp.LOGGER.debug("Establishing the admin user");
-        sql = "INSERT INTO " + schema + ".users " +
-            "    VALUES ('admin', 'Admin User', MD5('password'), 'email@example.com', TRUE)";
+
+        sql = 
+        //- SQL -----------------------------------------------------------------------------------------------------
+        "INSERT INTO " + schema + ".users " +
+        "    VALUES ('admin', 'Admin User', MD5('password'), 'email@example.com', TRUE)";
+        //- SQL -----------------------------------------------------------------------------------------------------
+
         stmt.execute(sql);
     }
 
@@ -110,10 +134,14 @@ public class SecurityController {
         user = user.trim();
         user = user.toLowerCase();
 
-        sql = "SELECT user_enabled " + 
-                "FROM " + schema + ".users " + 
-                "WHERE user_id = '" + user + "'" +
-                "   AND user_password = MD5('" + pwd + "')";
+        sql = 
+        //- SQL -----------------------------------------------------------------------------------------------------
+        "SELECT user_enabled " + 
+        "   FROM " + schema + ".users " + 
+        "   WHERE user_id = '" + user + "'" +
+        "       AND user_password = MD5('" + pwd + "')";
+        //- SQL -----------------------------------------------------------------------------------------------------
+
         rs = stmt.executeQuery(sql);
 
         if (!rs.first()) {

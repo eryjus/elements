@@ -105,3 +105,38 @@ Finally, I am at a position I can actually authenticate a user.
 **12-Mar-2018**
 
 Well today I was able to write the authentication code.   I am currently passing the password in clear text to the MySQL server, so that is something I need to take care of one day.  I also documented the SecurityController class and I am ready to commit my changes.
+
+Ok, so what's next?  Going back to my list from 10-Mar....
+
+The last thing from that list was to connect to and create if necessary the Elements schema.  Well, I do not think it is proper for the LoginController to be responsible for that function.  It is more appropriate to open the main screen and let the main application take care of the Elements schema -- after all, that's what the application is all about.
+
+So, as I wrap up for the night, I have a shell of an application.  It has: a stacked frame pane, an Elements sub-app icon, a help button, and an exit button.  Tomorrow, I will want to add a controller for the application so that I can at least login and use the application to exit.
+
+
+**13-Mar-2018**
+
+Well I have been able to get the main form to load, replacing the login form.  I'm actually pretty happy about this milestone.  Now I can work on the main application and get some real functionality started.
+
+I do have a few things that are not quite right, so I am going to start a todo.md file to keep track of these before I get into any bug tracking on github.com.  I really do not want to clutter up the bug list with my own known todo list.
+
+So, the point of the application is to maintain business data elements.  So, it's time to start setting that form in place.  What does that need to look like?
+
+Well, I think the following features are in order:
+* Open with a list of existing elements
+    * Paginate?
+    * Query By Example
+    * Jump to...
+    * When to search/refresh the list?
+* Buttons to add new and change/delete existing elements
+* Method to close the form (exit, but maybe not...)
+* Of course, I need to check the database and table and create both as needed
+
+I have been using https://sqldbm.com as a tools to lay out my data model.  
+
+
+**14-Mar-2018**
+
+Well, let's start with Happy Pi Day!!  
+
+I started today be formatting some SQL statements and trying to make the code a bit more readable.  The goal is to have an MVC implementation.  MVC stands for Model, View, Controller.  I have the controller part and the view part.  But it dawned on me that I am mis-characterizing the SecurityController and would be better characterized as a SecurityModel.  It is, in short, a database model.  So, I will correct that now since it is clearly not right.  As a matter of fact, the same fact holds true for the IniController...  it should be IniModel.  I will commit these changes since it is a significant flaw in my initial thinking.
+
