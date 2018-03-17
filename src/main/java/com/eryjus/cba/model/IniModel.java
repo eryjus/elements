@@ -1,7 +1,7 @@
 //===================================================================================================================
 // IniModel.java -- This is the model that is responsible for the cba.ini values
 // -----------------------------------------------------------------------------------------------------------------
-//
+//d
 // This class is responsible for reading the values from the cba.ini file.  Each element that can be read will
 // have its own method to ensure the default values are consistent.
 //
@@ -25,47 +25,60 @@ import org.ini4j.Ini;
 import org.ini4j.IniPreferences;
 
 
-/**
- * The IniControler class is used to interface with the cba.ini configuration file.
- */
-public class IniModel {
-    private static Ini ini;
-    private static Preferences prefs;
+//-------------------------------------------------------------------------------------------------------------------
+// class IniModel -- this class is responsible for reading data from the cba.ini file, taking into account the 
+//                   default values for each [stanza] key= combination.  The access methods are the only manner in 
+//                   which a value can be retrieved to enforce consistent standards.  Additionally, this class is 
+//                   declared as `final` to prevent the defaults from being overridden somewhere else.
+//-------------------------------------------------------------------------------------------------------------------
+public final class IniModel {
+    private Ini ini;
+    private Preferences prefs;
 
-    /**
-     * Initialize the class to be able to read the class
-     */
-    public static void initialize() throws Exception {
+
+    //---------------------------------------------------------------------------------------------------------------
+    // IniModel constructor -- this constructor will open an existing cba.ini file and will serve its configuration
+    //                         options via access methods.  Note that the file must exist or an empty file will be 
+    //                         created; there is no check for an existing file.
+    //---------------------------------------------------------------------------------------------------------------
+    public IniModel () {
         ElementsApp.LOGGER.trace("Initializing IniModel class");
 
         String fn = "cba.ini";
-        IniModel.ini = new Ini(new File(fn));
-        IniModel.prefs = new IniPreferences(IniModel.ini);
+        try { ini = new Ini(new File(fn)); 
+            prefs = new IniPreferences(ini);
+        } catch (Exception ex) { 
+            ElementsApp.LOGGER.trace("Unable to load " + fn, ex);
+            ini = null;
+            prefs = null; 
+        }
     }
 
 
-    /**
-     * This is the workhorse of the class to read a string value.  All other types will be converted
-     * from a String.
-     */
-    private static String getStringValue(String stanza, String option, String dftVal) {
+    //---------------------------------------------------------------------------------------------------------------
+    // getStringValue() -- This is the workhorse of the class, where all values will be read from the file as 
+    //                     String and it will be up to the calling methods to convert the value as necessary.
+    //---------------------------------------------------------------------------------------------------------------
+    private String getStringValue(String stanza, String option, String dftVal) {
         ElementsApp.LOGGER.debug("Requested to read [" + stanza + "] and option \"" + option + "\"");
         return prefs.node(stanza).get(option, dftVal);
     }
 
 
-    /**
-     * Get the inividual configuration settings for the Elements database
-     */
-    public static String getElementSchema() { return getStringValue("elements", "schema", "cba_elements"); }
-    public static String getElementUser() { return getStringValue("elements", "user", "cba"); }
-    public static String getElementPassword() { return getStringValue("elements", "password", "C00lApp$"); }
+    //---------------------------------------------------------------------------------------------------------------
+    // getElement*() -- these functions are used to retrieve configuration options for the [elements] stanza.  The
+    //                  default values are established in these methods.
+    //---------------------------------------------------------------------------------------------------------------
+    public String getElementSchema() { return getStringValue("elements", "schema", "cba_metadata"); }
+    public String getElementUser() { return getStringValue("elements", "user", "cba"); }
+    public String getElementPassword() { return getStringValue("elements", "password", "C00lApp$"); }
 
 
-    /**
-     * Get the inividual configuration settings for the System database
-     */
-    public static String getSystemSchema() { return getStringValue("system", "schema", "cba_system"); }
-    public static String getSystemUser() { return getStringValue("system", "user", "cba"); }
-    public static String getSystemPassword() { return getStringValue("system", "password", "C00lApp$"); }
+    //---------------------------------------------------------------------------------------------------------------
+    // getSystem*() -- these functions are used to retrieve configuration options for the [system] stanza.  The
+    //                 default values are established in these methods.
+    //---------------------------------------------------------------------------------------------------------------
+    public String getSystemSchema() { return getStringValue("system", "schema", "cba_system"); }
+    public String getSystemUser() { return getStringValue("system", "user", "cba"); }
+    public String getSystemPassword() { return getStringValue("system", "password", "C00lApp$"); }
 }

@@ -23,6 +23,7 @@ package com.eryjus.cba;
 
 import com.eryjus.cba.model.IniModel;
 import com.eryjus.cba.model.SecurityModel;
+import com.eryjus.cba.model.ElementsModel;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,33 +36,39 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 
-/**
- * This is the main application class, which will orchestrate the UI
- * 
- * @author Adam Clark
- */
+//-------------------------------------------------------------------------------------------------------------------
+// class ElementsApp -- this is the top level application and class for maintaining the elements application.  It 
+//                      contains the main entry point for the application.
+//-------------------------------------------------------------------------------------------------------------------
 public class ElementsApp extends Application {
-    public static Logger LOGGER = LogManager.getLogger(ElementsApp.class);
+    public static Logger LOGGER = null;
 
-    /**
-     * The main application entry point
-     */
+
+    //---------------------------------------------------------------------------------------------------------------
+    // main() -- this is the main entry point for the application.
+    //---------------------------------------------------------------------------------------------------------------
     public static void main(String[] args) throws Exception {
+        LOGGER = LogManager.getLogger();
+
         LOGGER.info("Welcome to 'cba Elements Maintenance'; (c) 2018 Adam Clark");
         LOGGER.info("   Licensed under the BEER-WARE License; revision 42");
-        IniModel.initialize();
-        SecurityModel.initialize();
+
+        // -- create temporary instances to force initialization
+        new IniModel();
+        new SecurityModel();
+        new ElementsModel();
+
         launch(args);
     }
 
 
-    /**
-     * start the application UI.  This means displaying the login screen and authenticating the user.
-     * 
-     * @param stage
-     */
+    //---------------------------------------------------------------------------------------------------------------
+    // start() -- this method is required my JavaFX to be overridden and is called when the application starts.  It
+    //            handles all the initialization for the application and presents the Login screen for the users.
+    //---------------------------------------------------------------------------------------------------------------
     @Override
     public void start(Stage stage) throws Exception {
+
         Parent root = FXMLLoader.load(getClass().getResource("/view/login.fxml"));
         Scene scene = new Scene(root, 375, 234);
         

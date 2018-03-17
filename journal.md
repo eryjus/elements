@@ -140,3 +140,13 @@ Well, let's start with Happy Pi Day!!
 
 I started today be formatting some SQL statements and trying to make the code a bit more readable.  The goal is to have an MVC implementation.  MVC stands for Model, View, Controller.  I have the controller part and the view part.  But it dawned on me that I am mis-characterizing the SecurityController and would be better characterized as a SecurityModel.  It is, in short, a database model.  So, I will correct that now since it is clearly not right.  As a matter of fact, the same fact holds true for the IniController...  it should be IniModel.  I will commit these changes since it is a significant flaw in my initial thinking.
 
+The next thing I am going to do is abstract the database driver loading and connection.  I am going to have several database connections to manage and it makes sense to federate this code into a parent class.  This class will be DatabaseModel.
+
+Finally, I took care of changing the classes to be able to be instantiated.  I feel that this is a better implementation to follow.  It gives me the ability to reuse several classes (such as in DatabaseModel).
+
+I'm not ready to commit this change yet, but it have impacted nearly everything as a result.  Once I all my changes properly documented (I'm not sure I am going to keep up with the java documentation standard -- gotta think about that), I will work on that commit.
+
+
+**15-Mar-2018**
+
+Well, I'm still torn on the whole javadoc thing.  The system is generally for me, but I am publishing it in case someone else wants to follow it and learn about what I am doing.  Overall, this is a standalone application and not a business library.  All of these things make me waffle back and forth on utilizing javadoc.  Overall, the way I am leaning at this point is to drop the javadoc standards for now and add them back in if I reconsider this decision.  I prefer to document the code really well and therefore think it lends to better understanding.  Javadoc in my opinion is far better suited for documenting and publishing API documentation.  Well, I think I have made a decision.  I will go back through all the sources and remove the javadoc elements and document them in my own style.
