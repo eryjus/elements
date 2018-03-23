@@ -45,7 +45,11 @@ public final class IniModel {
         ElementsApp.LOGGER.trace("Initializing IniModel class");
 
         String fn = "cba.ini";
-        try { ini = new Ini(new File(fn)); 
+        File file = new File(fn);
+        try {
+            if (!file.exists()) file.createNewFile();
+
+            ini = new Ini(file); 
             prefs = new IniPreferences(ini);
         } catch (Exception ex) { 
             ElementsApp.LOGGER.trace("Unable to load " + fn, ex);

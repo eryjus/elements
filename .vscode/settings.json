@@ -3,6 +3,7 @@
     "cSpell.words": [
         "BIGINT",
         "DATETIME",
+        "Inet",
         "LONGBLOB",
         "LONGTEXT",
         "MEDIUMBLOB",
@@ -13,6 +14,7 @@
         "TINYTEXT",
         "VARBINARY",
         "classpath",
+        "elemview",
         "prefs",
         "repo",
         "schema's",

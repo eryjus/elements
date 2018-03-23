@@ -6,12 +6,21 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eryjus.cba.controller.ElementsController">
    <left>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="731.0" prefWidth="104.0" BorderPane.alignment="CENTER">
          <children>
             <Label />
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAddElement" prefHeight="117.0" prefWidth="100.0">
+              <graphic>
+                <ImageView fitHeight="117.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../images/add-elements.jpg" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </Button>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="100.0" text="Add" />
             <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="117.0" prefWidth="100.0">
                <graphic>
                   <ImageView fitHeight="117.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
@@ -21,7 +30,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Label />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="100.0" text="List" />
          </children>
       </VBox>
    </left>
@@ -84,7 +93,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Label alignment="CENTER" prefHeight="15.0" prefWidth="596.0" text="Open application name" GridPane.columnIndex="2" GridPane.columnSpan="5">
+            <Label fx:id="idOpenApp" alignment="CENTER" prefHeight="15.0" prefWidth="596.0" text="" GridPane.columnIndex="2" GridPane.columnSpan="5">
                <font>
                   <Font name="System Bold Italic" size="30.0" />
                </font>
@@ -93,6 +102,6 @@
       </GridPane>
    </top>
    <center>
-      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="idMainAnchor" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

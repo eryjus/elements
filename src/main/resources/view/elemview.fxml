@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="idRoot" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eryjus.cba.controller.ElemViewController">
+   <children>
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="950.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextField fx:id="idElementName" GridPane.columnIndex="10" GridPane.columnSpan="8" GridPane.rowIndex="1" />
+            <TextField fx:id="idElementShortDescription" GridPane.columnIndex="10" GridPane.columnSpan="14" GridPane.rowIndex="2" />
+            <ComboBox fx:id="idElementType" prefWidth="150.0" GridPane.columnIndex="10" GridPane.columnSpan="6" GridPane.rowIndex="3" />
+            <TextField fx:id="idElementSize" GridPane.columnIndex="10" GridPane.columnSpan="3" GridPane.rowIndex="4" />
+            <CheckBox fx:id="idElementNotNull" mnemonicParsing="false" GridPane.columnIndex="10" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <TextField fx:id="idElementDefaultValue" GridPane.columnIndex="10" GridPane.columnSpan="10" GridPane.rowIndex="6" />
+            <CheckBox fx:id="idElementZeroFill" mnemonicParsing="false" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+            <CheckBox fx:id="idElementAutoIncrement" mnemonicParsing="false" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+            <CheckBox fx:id="idElementUnsigned" mnemonicParsing="false" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
+            <TextField fx:id="idElementDecimals" prefHeight="25.0" prefWidth="128.0" GridPane.columnIndex="15" GridPane.columnSpan="3" GridPane.rowIndex="9" />
+            <TextField fx:id="idElementCharacterSet" GridPane.columnIndex="15" GridPane.columnSpan="5" GridPane.rowIndex="10" />
+            <TextField fx:id="idElementCollationName" GridPane.columnIndex="15" GridPane.columnSpan="5" GridPane.rowIndex="11" />
+            <TextArea fx:id="idElementBusinessDescription" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="23" GridPane.rowIndex="14" GridPane.rowSpan="8" />
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#handleSubmitButtonAction" text="OK" GridPane.columnIndex="21" GridPane.rowIndex="23" />
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#handleCancelButtonAction" text="Cancel" GridPane.columnIndex="23" GridPane.columnSpan="2" GridPane.rowIndex="23" />
+            <Label text="Element Name: " GridPane.columnIndex="5" GridPane.columnSpan="5" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Label text="Element Description: " GridPane.columnIndex="5" GridPane.columnSpan="5" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <Label text="Element Type: " GridPane.columnIndex="5" GridPane.columnSpan="5" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Label text="Not Null: " GridPane.columnIndex="5" GridPane.columnSpan="5" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+            <Label text="Business Description" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.rowIndex="13" />
+            <Label fx:id="idSizeLabel" text="Element Size: " GridPane.columnIndex="5" GridPane.columnSpan="5" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+            <Label fx:id="idDecimalsLabel" text="Element Decimals: " GridPane.columnIndex="10" GridPane.columnSpan="5" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
+            <Label fx:id="idZeroLabel" text="Zero Fill: " GridPane.columnIndex="2" GridPane.columnSpan="5" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
+            <Label fx:id="idIncLabel" text="Auto Increment: " GridPane.columnIndex="2" GridPane.columnSpan="5" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+            <Label fx:id="idCharSetLabel" text="Character Set: " GridPane.columnIndex="10" GridPane.columnSpan="5" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+            <Label fx:id="idUnsignedLabel" text="Unsigned: " GridPane.columnIndex="2" GridPane.columnSpan="5" GridPane.halignment="RIGHT" GridPane.rowIndex="11" />
+            <Label fx:id="idCollationLabel" text="Collation Name: " GridPane.columnIndex="10" GridPane.columnSpan="5" GridPane.halignment="RIGHT" GridPane.rowIndex="11" />
+            <Label fx:id="idDefaultLabel" text="Default Value: " GridPane.columnIndex="5" GridPane.columnSpan="5" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+            <Label text="Common Attributes" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.halignment="CENTER" />
+            <Label text="Type-Specific Attributes" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+            <Line endX="775.0" startX="-100.0" GridPane.columnIndex="1" GridPane.columnSpan="23" GridPane.rowIndex="7" />
+            <Line endX="775.0" startX="-100.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

@@ -42,6 +42,7 @@ import javafx.stage.StageStyle;
 //-------------------------------------------------------------------------------------------------------------------
 public class ElementsApp extends Application {
     public static Logger LOGGER = null;
+    private static String user;
 
 
     //---------------------------------------------------------------------------------------------------------------
@@ -78,4 +79,11 @@ public class ElementsApp extends Application {
         stage.sizeToScene();
         stage.show();
     }
+
+
+    //---------------------------------------------------------------------------------------------------------------
+    // user access methods
+    //---------------------------------------------------------------------------------------------------------------
+    public static String getUser() { return user; }
+    public static void setUser(String u) { user = u; }
 }

@@ -150,3 +150,90 @@ I'm not ready to commit this change yet, but it have impacted nearly everything 
 **15-Mar-2018**
 
 Well, I'm still torn on the whole javadoc thing.  The system is generally for me, but I am publishing it in case someone else wants to follow it and learn about what I am doing.  Overall, this is a standalone application and not a business library.  All of these things make me waffle back and forth on utilizing javadoc.  Overall, the way I am leaning at this point is to drop the javadoc standards for now and add them back in if I reconsider this decision.  I prefer to document the code really well and therefore think it lends to better understanding.  Javadoc in my opinion is far better suited for documenting and publishing API documentation.  Well, I think I have made a decision.  I will go back through all the sources and remove the javadoc elements and document them in my own style.
+
+
+**16-Mar-2018**
+
+I finished up the documentation changes today and committed my changes.  My next step is to update the SqlDBM site with the proper field names I used (I had CamelCase before and ended up with lower_case in the implementation).  This is not publicly visible since I cannot publish a read-only version of the design at this time.
+
+I found a bug in the IniModel that would not create the cba.ini file if it does not exist.  I am not tracking that file in the repo anymore, so I changed the code to create it on first use.  Seems like I should not crash the system for a file that is not in the project.
+
+OK, so on to the listing of the elements in that table and what to display on the screen.  I have limited real-estate, so I am certain I will not be able to display everything. 
+
+The obvious choices are:
+* element_name (well, duh!)
+* element_type (pretty much the same as above)
+* element_size (nice to know when searching)
+* element_short_description (nice to see a description)
+
+Of the rest of the fields, the should not be needed on the summary list.  Since not all types will have all the the rest of the fields filled in, the extra data can be reviewed in a details panel.
+
+So, time to research how to create this form and place it in the main screen.
+
+
+**17-Mar-2018**
+
+Ok, so the model system I am using to figure out how to fit pieces together (StoreKeeper: https://github.com/kmrifat/StoreKeeper) uses an anchor pane to hold the working content and replaces the children with each new view that is opened.  Seems simple enough.  For me, I have a few different views I will be writing (list view, add/display/edit view, help view, and perhaps more as I get into it further), and I have 2 elements that I will need to manage for each view.  One is the obvious business content and the other is the screen title at the top of the overall application.  I just have to remember to call them 'views' or 'panes' rather than 'screens'.
+
+So, I replaced the StackPane for the main application view with an AnchorPane and called it `idMainAnchor`.  Now, it should be relatively simple to drop a view into this pane as a view and open a new view at will.  I need a view for which I can do this.  Let's start with the list view since I can add Elements to the database using interactive SQL for testing.
+
+As I finish up the day, I am able to open the Add Element pane and change the title appropriately.  Tomorrow, I will work on the controller for `elemview.fxml` and laying out the foundation for handling all the events.
+
+
+**18-Mar-2018**
+
+Today I will work on the following things that require actions to be developed:
+* The Cancel button (needs to ask if OK to cancel and lose work)
+* The OK button (need to audit all the fields and display an error if there are issues or write to the database if really OK and then clear the fields)
+* Element Name on change (needs to check the database to see if the name is unique)
+* Element Type on change (needs to display all the proper additional fields and check boxes according to the value selected)
+* Element Size on change (needs to be audited for a proper numeric value)
+* Element Decimals on change (needs to be audited for a proper numeric value)
+
+These functions are stubbed out and tracing to the log and now to fill them in.
+
+
+**20-Mar-2018**
+
+Well, I really did not get to doo much yesterday except take a quick look at the code.  I am still working on filling in the method details....
+
+So there are a couple of things that I came across while I was detailing out the methods:
+1. The Unsigned attribute is missing from the form and I need to check that
+1. Size and default values are not a common attributes
+1. Disabling the control only grays it out and does may not be the best choice
+1. Whatever I do with the one above, I will likely need to make the labels follow suit
+
+So, it makes sense to detail out in a table what can be edited (Name, Short Description, Business Description, Not Null, and Type are always open): see [design/elements.md](design/elements.md).
+
+*Notes:*
+^1^ - The size here indicates the "Fractional Seconds Part", or "fsp"
+
+I am also pulling the National Flag from the spec at this point.  It will likely come back since I will likely need it, but for now I cannot find it in the MySQL documentation.
+
+Well, this triggers several changes to make....
+
+While I am at it, I am going to eliminate the ENUM type from the list and it will drop back to a VARCHAR type.  Ultimately, I will back with a Code Definition table that will be added at a later date.
+
+So, I end today with a test to insert a record, which failed.  Debugging and improving robustness is on the agenda tomorrow.  Hopefully, I can write a commit tomorrow.
+
+
+**21-Mar-2018**
+
+The exception from last night was that the numeric value for decimals was not a proper number.  Well, the problem is that not all are really required and therefore a blank value is throwing an exception.  The trivial access methods are not going to work since not every element will have a value.
+
+I am able to now get records inserted.  However, I am not getting `null` values passed to the persistent table when I use setNull() on an integer type.  This leaves me in a quandary about allowing nulls in my application.  In particular, null is allowed in the database but I cannot enforce it, what value is that?
+
+Well, debugging was able to determine that I am actually setting the value based on the contents of the form.  Some more digging to do to get this all worked out.
+
+
+**22-Mar-2018**
+
+So, to restate my closing concern from yesterday...  The Database will allow a value to be `null` while the FXML view does not.  At least that I have been able to determine.  So, my decision is to try to get the JavaFX front end to handle nulls or to eliminate null support from the database side.  Oh, Google....
+
+So, I was not able to determine a quick method to properly handle nulls in the form (not without overriding several types anyway, but I may get there at some point for other reasons).  The easier method at this point is to make every field have `NOT NULL` and a defined default value (even when the database says it is not supported, an empty string is a value).
+
+So, that now bring up my data model...  what to do about the database values.  For now, I was using String and Integer and Boolean since they are closely defined in the language.  However, there are attributes that I would like to be able to incorporate into the data model that might be of some value such as the size limit of a string and setting it to something too big truncates the string.  Or....  do I just do that truncation when committing to the database.
+
+Ultimately, I guess, best practice would be to have class for each SQL data type that can be used to handle the Business Data -- basically each `element_name` is its own instance of a class while each `element_type` is its own class definition.  If I was to go down this road, this would end up as a separate project as .jar library as I would want to be able to leverage this in other applications.  This is a bit disappointing because I was wanting to get the application done quickly, but I think I have my path forward.
+
+At this point I am going to commit my changes since I have the most basic write functionality working.

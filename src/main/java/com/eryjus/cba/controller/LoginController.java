@@ -64,7 +64,8 @@ public class LoginController {
     // handleSubmitButtonAction() -- this method is called with the submit button is clicked.  The submit button is
     //                               the button called Sign In.
     //---------------------------------------------------------------------------------------------------------------
-    @FXML protected void handleSubmitButtonAction(ActionEvent event) {
+    @FXML 
+    protected void handleSubmitButtonAction(ActionEvent event) {
         boolean authenticated = false;
         actionTarget.setText("");
         ElementsApp.LOGGER.info("User " + userField.getText() + " requested to log in");
@@ -82,6 +83,7 @@ public class LoginController {
         // -- are we allowed to log in?  If so, present the main screen.
         if (authenticated) {
             ElementsApp.LOGGER.info("User " + userField.getText() + " has been authenticated and can log in.");
+            ElementsApp.setUser(userField.getText());
             Parent root;
 
             try {
@@ -116,7 +118,8 @@ public class LoginController {
     // handleExitButtonAction() -- when the exit button is clicked, exit the application appropriate to the platform
     //                             on which we are running.
     //---------------------------------------------------------------------------------------------------------------
-    @FXML protected void handleExitButtonAction(ActionEvent event) {
+    @FXML 
+    protected void handleExitButtonAction(ActionEvent event) {
         Platform.exit();
     }
 }
